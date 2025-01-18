@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        :root {
+            --background-color: #09122C;
+            --primary-color: #441752;
+            --secondary-color: #FFF0DC;
+            --button-color: #ffffff;
+            --button-hover: #7A5FA5;
+            --text-color: #441752;
+            --input-background: #FFF0DC;
+            --input-border: #7A5FA5;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .calculator {
+            background: var(--input-background);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            width: 400px;
+        }
+
+        .calculator h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: var(--primary-color);
+        }
+
+        .calculator form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .calculator label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .calculator select,
+        .calculator input[type="number"],
+        .calculator button {
+            padding: 12px;
+            border: 1px solid var(--input-border);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .calculator select,
+        .calculator input[type="number"] {
+            background-color: var(--input-background);
+        }
+
+        .calculator select:focus,
+        .calculator input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(68, 23, 82, 0.3);
+        }
+
+        .calculator button {
+            background-color: var(--primary-color);
+            color: var(--button-color);
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+        .calculator button:hover {
+            background-color: var(--button-hover);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Calculator</h1>
+        <form action="/calculate" method="post">
+            <label for="operation">Select Operation:</label>
+            <select name="operation" id="operation" required>
+                <option value="add">Addition</option>
+                <option value="subtract">Subtraction</option>
+                <option value="multiply">Multiplication</option>
+                <option value="divide">Division</option>
+                <option value="square">Square</option>
+                <option value="sqrt">Square Root</option>
+                <option value="sin">Sine</option>
+                <option value="cos">Cosine</option>
+                <option value="tan">Tangent</option>
+            </select>
+
+            <label for="num1">Enter First Number:</label>
+            <input type="number" name="num1" id="num1" step="any" required>
+
+            <label for="num2">Enter Second Number (if needed):</label>
+            <input type="number" name="num2" id="num2" step="any">
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result is not none %}
+        <div class="result">Result: {{ result }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
